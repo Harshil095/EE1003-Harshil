@@ -149,12 +149,12 @@ Now lets verify the solution computationally from the definition of $\frac{dy}{d
 \end{align}
 From the differential equation given,
 \begin{align}
-    \frac{dy}{dx} = \frac{y_n - x_n}{y_n + x_n}
+    \frac{dy}{dx} = -\frac{(xy+y^2)}{x^2}
     \label{0.22}
 \end{align}
 Substituting \ref{0.22} in \ref{0.21}
 \begin{align}
-    y_{n+1} = y_n + \brak{\frac{y_n - x_n}{y_n + x_n}} \cdot h 
+    y_{n+1} = y_n + \brak{-\frac{(xy+y^2)}{x^2}} \cdot h 
 \end{align}
 \begin{figure}
     \centering
