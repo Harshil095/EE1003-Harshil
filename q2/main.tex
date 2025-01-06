@@ -124,6 +124,75 @@ The curve is
 \begin{align}
    x+y = 4 -2e^x
 \end{align}
+
+
+\textbf{Solution using Laplace transform method}\\
+\begin{align}
+    \frac{dy}{dx} = x+y-5
+\end{align}
+Applying the Laplace transform to both sides:
+
+\begin{align}
+    \mathcal{L}\left\{\frac{dy}{dx}\right\} = \mathcal{L}\left\{x + (y - 5)\right\}
+\end{align}
+\begin{align}
+    sY(s) - y(0) = \frac{1}{s^2} + Y(s) - \frac{5}{s}
+\end{align}
+\begin{align}
+    Y(s) = \frac{\frac{1}{s^2} - \frac{5}{s} + y(0)}{s - 1}
+\end{align}
+\begin{align}
+    Y(s) = \frac{1}{s^2 (s - 1)} - \frac{1}{s (s - 1)} \cdot 5 + \frac{y(0)}{s - 1}
+\end{align}
+Inverse Laplace Transform of Each Term
+\begin{align}
+    \frac{1}{s^2 (s - 1)} = \frac{A}{s} + \frac{B}{s^2} + \frac{C}{s - 1}
+\end{align}
+\begin{align}
+    1 = A\text{ } s\text{ } (s - 1) + B \text{ }(s - 1) + C \text{ }s^2
+\end{align}
+we get
+\begin{align}
+    \frac{1}{s^2 (s - 1)} = -\frac{1}{s} -\frac{1}{s^2} + \frac{1}{s - 1}
+\end{align}
+Taking the inverse Laplace transform
+\begin{align}
+    \mathcal{L}^{-1}\left\{ \frac{1}{s} - \frac{1}{s - 1} \right\} = -1 - x + e^x
+\end{align}
+Inverse Laplace of \( \frac{5}{s (s - 1)} \)
+\begin{align}
+    \frac{5}{s (s - 1)} = \frac{A}{s} + \frac{B}{s - 1}
+\end{align}
+\begin{align}
+    5 = A (s - 1) + B s
+\end{align}
+Solving gives \( A = 5 \) and \( B = -5 \)
+\begin{align}
+    \frac{5}{s (s - 1)} = \frac{5}{s} - \frac{5}{s - 1}
+\end{align}
+Taking the inverse Laplace transform
+\begin{align}
+    \mathcal{L}^{-1}\left\{ \frac{5}{s} - \frac{5}{s - 1} \right\} = 5 - 5 e^x
+\end{align}
+Inverse Laplace of \( \frac{y(0)}{s - 1} \)
+\begin{align}
+    \mathcal{L}^{-1}\left\{ \frac{y(0)}{s - 1} \right\} = y(0) e^x
+\end{align}
+combining the results from all parts, we have the solution for $y(x)$
+The general solution too this differential equation is 
+\begin{align}
+    y(x) = 4 - x + (y(0) - 4) e^x \\
+    y(x) = 4 - x + c  e^x
+    \label{0.30}
+\end{align}
+To find c, put x=0 and y=2 in \ref{0.30}
+\begin{align}
+    c = -2  
+\end{align}
+The curve is 
+\begin{align}
+   x+y = 4 -2e^x
+\end{align}
 Now lets verify the solution computationally from the definition of $\frac{dy}{dx}$
 \begin{align}
     y_{n+1}= y_{n} + \frac{dy}{dx} \cdot h
@@ -138,7 +207,7 @@ Substituting \ref{0.22} in \ref{0.21}
 \begin{align}
     y_{n+1} = y_n + \brak{x_n + y_n -5} \cdot h 
 \end{align}
-From the figure it is clearly verified that the theoretical solution matches with the computational solution
+From the figure it is clearly verified that the theoretical solution matches with the computational solution\\
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figs/Figure_1.png}

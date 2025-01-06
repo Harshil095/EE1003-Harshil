@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Load the shared library
 lib = ctypes.CDLL("./c.so")
 
-# Define the function signature for `points`
+# Define the function signature for points
 lib.points.argtypes = [
     ctypes.c_float,  # x_0
     ctypes.c_float,  # y_0
@@ -27,7 +27,7 @@ steps = int((x_end - x_0) / step_size) + 1
 x_points = np.zeros(steps, dtype=np.float32)
 y_points = np.zeros(steps, dtype=np.float32)
 
-# Call the `points` function from the C shared library
+# Call the points function from the C shared library
 lib.points(x_0, y_0, x_end, step_size, x_points, y_points, steps)
 
 # Define the theoretical solution with C = -2
@@ -45,7 +45,7 @@ plt.figure(figsize=(10, 6))
 plt.plot(x_points, y_points, 'ro-', markersize=2, linewidth=4, label="sim")
 
 # Plot the theoretical solution
-plt.plot(x_theory, y_theory, 'b-', linewidth=2, label="Theory")
+plt.plot(x_theory, y_theory, 'b-', linewidth=2, label="theory")
 
 # Add labels, title, grid, and legend
 plt.xlabel("x")
