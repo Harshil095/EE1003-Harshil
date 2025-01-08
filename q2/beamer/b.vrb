@@ -1,0 +1,12 @@
+\frametitle{Python Code}
+
+    \begin{lstlisting}
+  # Add labels, title, grid, and legend
+plt.xlabel("x") 1
+plt.ylabel("y")
+plt.grid(True, linestyle="--")
+plt.legend()
+
+# Display the plot
+plt.show()
+    \end{lstlisting}

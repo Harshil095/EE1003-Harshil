@@ -26,14 +26,6 @@ int main() {
     // Calculate the area
     double area = trapezoidal_rule(integrand, a, b, n);
 
-    // Open a new file to write the output
-    FILE *file = fopen("area.txt", "w");
-    if (file != NULL) {
-        fprintf(file, "The area under the curve is: %lf\n", area);
-        fclose(file);  // Close the file
-    } else {
-        printf("Error opening the file.\n");
-    }
 
     return 0;
 }
