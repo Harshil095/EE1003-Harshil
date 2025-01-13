@@ -25,7 +25,6 @@ y = x**2 - 7 * x - 60         # Define the function f(x) = x^2 - 7x - 60
 plt.plot(x, y, label='f(x) = x^2 - 7x - 60')
 plt.axhline(0, color='black', linewidth=0.7, linestyle='--')
 plt.scatter([root], [0], color='red', label=f'Root at x = {root:.6f}')
-plt.title('Newton\'s Method: Finding Roots')
 plt.xlabel('x')
 plt.ylabel('f(x)')
 plt.legend()
