@@ -273,16 +273,40 @@ The companion matrix for the quadratic equation $x^2 - 7x - 60 = 0$ is:
         1 & 0
     \end{bmatrix}.
 \end{align}
-
+General Expression of Hessenberg form 
+\begin{align}
+H = 
+\begin{bmatrix}
+h_{1,1} & h_{1,2} & h_{1,3} & \cdots & h_{1,n} \\
+h_{2,1} & h_{2,2} & h_{2,3} & \cdots & h_{2,n} \\
+0 & h_{3,2} & h_{3,3} & \cdots & h_{3,n} \\
+0 & 0 & h_{4,3} & \cdots & h_{4,n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & h_{n,n}
+\end{bmatrix}
+\end{align}
 Since $H$ is already in Hessenberg form, we can directly proceed with the QR iteration. For the first iteration:
 \begin{align}
     \sigma &= H_{2,2} = 0, \\
-    H_{\text{shifted}} &= H - \sigma I = \begin{bmatrix}
+    H_{\text{shifted}} &= H - \sigma I 
+\end{align}
+Since $\sigma$ is 0 
+\begin{align}
+     H_{\text{shifted}} = H 
+\end{align}
+Substituting $H$
+\begin{align}
+    H_{\text{shifted}} = \begin{bmatrix}
         7 & 60 \\
         1 & 0
-    \end{bmatrix}.
+    \end{bmatrix}
 \end{align}
-
+\begin{align}
+H_{\text{new}} = H_{\text{shifted}} - \Delta H
+\end{align}
+\begin{align}
+    \Delta H = H_{\text{shifted}} - Q^\top H_{\text{shifted}} Q
+\end{align}
 The Givens rotation parameters are calculated as:
 \begin{align}
     x_{1,1} &= 7, \\
@@ -309,7 +333,7 @@ Next, compute $R$ and update $H$:
     H_{\text{new}} &= RQ.
 \end{align}
 
-After iterating for 20 steps, the matrix converges to:
+After iterating, the matrix converges to 
 \begin{align}
     H = \begin{bmatrix}
         -5 & 0 \\
