@@ -115,10 +115,23 @@ The Python code generates a bar chart where:
     \item The shared object file facilitates seamless integration with Python, leveraging Python's powerful visualization capabilities.
     \item The probabilities provide a normalized representation of the frequency distribution, making it easier to interpret the results.
 \end{itemize}
+\section*{Stemplot Distribution}
+When a die is rolled, the prime outcomes are ${2,3,5}$. Each face of a fair die has an equal probability of occurring, which is $\frac{1}{6}$. This means that each of the outcomes {2,3,5} have probability $\frac{1}{6}$
+\begin{itemize}
+    \item The stem plot shows vertical lines (stems) at the positions 2, 3, 5 on the x-axis 
+    \item The height of each stem corresponds to the probability of that particular prime number outcome $\frac{1}{6}$
+\end{itemize}
+\begin{align}
+    P(A) = P(2) + P(3) + P(5) = \frac{1}{6}+\frac{1}{6} +\frac{1}{6} = \frac{1}{2}
+\end{align}
 \section*{Conclusion}
 This task demonstrates the integration of C and Python for simulating and visualizing a probabilistic experiment. By combining the computational efficiency of C with the graphical capabilities of Python, we achieve an effective solution for analyzing and representing data. The code clearly shows that the probability of the given event is equal to \textbf{half}
 \begin{figure}[h!]
    \centering
    \includegraphics[width=\columnwidth]{figs/Figure_1.png}
+\end{figure}
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\columnwidth]{figs/Figure_2.png}
 \end{figure}
 \end{document}
