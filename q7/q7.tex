@@ -85,36 +85,95 @@ on substituing \ref{0.3}, \ref{0.4}
 \begin{align}
     P(A) = \frac{1}{2}
 \end{align}
-\section*{Introduction}
-The task involves simulating the roll of a single die using a C program, compiling it into a shared object (.so) file, and then using Python to call this function. The Python code processes the results and generates a probability distribution plot for outcomes \( 2,3,5 \) \\ 
-\section*{C Code Description}
-The C program generates random outcomes for rolling a single die, where the possible outcomes range from \(1\) to \(6\). Outcomes are categorized as follows:\\
-The program uses the \texttt{rand()} function to generate random numbers and increments the respective indices of the results array based on the generated outcome.\\
-\section*{Python Code Description}
-The Python code is responsible for:
+\textbf{Computational solution: }\\
+
+\section*{Computation of Probabilities for Rolling a Die}
+
+To compute the probability of obtaining specific outcomes when rolling a six-sided die, we rely on two key concepts: the Probability Mass Function (PMF) and the Cumulative Distribution Function (CDF).
+
+\subsection*{Definitions}
+\subsubsection*{Probability Mass Function (PMF)}
+The PMF represents the probability of each individual outcome in the sample space \( S \). For a six-sided die:
+\[
+S = \{1, 2, 3, 4, 5, 6\},
+\]
+the PMF is given as:
+\[
+P(X = x) = 
+\begin{cases} 
+\frac{1}{3}, & x \in \{2, 3, 5\}, \\ 
+0, & x \notin \{2, 3, 5\}.
+\end{cases}
+\]
+
+\subsubsection*{Cumulative Distribution Function (CDF)}
+The CDF represents the cumulative probability of outcomes up to a given value \( x \), defined as:
+\[
+F(x) = P(X \leq x) = \sum_{k=1}^{x} P(X = k).
+\]
+For the event "A prime number will appear" on a six-sided die:
+\[
+F(x) = 
+\begin{cases} 
+0, & x < 2, \\
+\frac{1}{3}, & 2 \leq x < 3, \\
+\frac{2}{3}, & 3 \leq x < 5, \\
+1, & x \geq 5.
+\end{cases}
+\]
+
+\subsection*{Simulation Process}
+We simulate the rolling of a die to compute the probability of a prime number appearing using the following steps:
 \begin{enumerate}
-    \item Loading the shared object file generated from the C program using the \texttt{ctypes} library.
-    \item Calling the C function to roll the die for a specified number of trials (e.g., \(10,00,000\)).
-    \item Retrieving the results from the C function as an array.
-    \item Calculating the probabilities for each outcome using the formula:
+    \item A six-sided die produces outcomes in the set:
     \[
-    P(\text{outcome}) = \frac{\text{frequency of outcome}}{\text{total trials}}
+    S = \{1, 2, 3, 4, 5, 6\}.
     \]
-    \item Plotting the probability distribution using \texttt{matplotlib}.
+    \item Identify the subset of outcomes corresponding to prime numbers:
+    \[
+    S_{\text{prime}} = \{2, 3, 5\}.
+    \]
+    \item For each simulated roll, a random integer \( X \) is generated such that \( X \in S \), using a random number generator function:
+    \[
+    X = (\text{rand()} \mod 6) + 1.
+    \]
+    \item Check if the outcome \( X \in S_{\text{prime}} \). Track the number of occurrences of prime outcomes over \( N \) trials, where \( N \) is the total number of simulations.
+    \item Compute both the PMF and CDF for the event "A prime number appears":
+    \begin{itemize}
+        \item PMF: The frequency of each prime outcome (\( \{2, 3, 5\} \)) is divided by the total trials to compute the probability of each prime face. Non-prime outcomes (\( \{1, 4, 6\} \)) have probabilities of zero.
+        \item CDF: The cumulative probabilities are calculated by summing the PMF values of the prime outcomes up to a given \( x \). For \( x \notin S_{\text{prime}} \), the CDF remains constant.
+    \end{itemize}
 \end{enumerate}
-\section*{Graphical Output}
-The Python code generates a bar chart where:
+
+\subsection*{Calculation of Probabilities}
+
+\subsubsection*{Probability of Each Outcome (PMF)}
+The probability of rolling each face \( i \) (\( i \in \{2, 3, 5\} \)) is computed as:
+\[
+P(i) = \frac{\text{Number of rolls resulting in } i}{N},
+\]
+where \( i \) is restricted to the set of prime numbers \( \{2, 3, 5\} \). For non-prime outcomes (\( i \in \{1, 4, 6\} \)), \( P(i) = 0 \).
+
+\subsubsection*{Cumulative Probability (CDF)}
+The cumulative probability up to face \( i \) is:
+\[
+F(i) = 
+\begin{cases} 
+0, & i < 2, \\
+\frac{1}{3}, & 2 \leq i < 3, \\
+\frac{2}{3}, & 3 \leq i < 5, \\
+1, & i \geq 5.
+\end{cases}
+\]
+Here, \( F(i) \) accumulates probabilities only for the prime outcomes. For non-prime values of \( i \), \( F(i) \) remains constant.
+
+\subsection*{Output Representation}
+The computed probabilities are represented in two forms:
 \begin{itemize}
-    \item The x-axis represents the outcomes: \(2,3,5\).
-    \item The y-axis represents the probabilities of each outcome, ranging from \(0\) to \(1\).
-    \item Each bar height corresponds to the probability of the respective outcome.
+    \item \textbf{PMF}: The probabilities of rolling each face from the set of prime numbers \( \{2, 3, 5\} \). Non-prime outcomes \( \{1, 4, 6\} \) have probabilities of zero.
+    \item \textbf{CDF}: The cumulative probabilities up to each face \( \{2, 3, 5\} \), showing the cumulative likelihood of rolling a prime number. For non-prime outcomes, the cumulative probability remains constant.
 \end{itemize}
-\section*{Key Points}
-\begin{itemize}
-    \item Using the C program ensures efficient computation of outcomes for large numbers of trials.
-    \item The shared object file facilitates seamless integration with Python, leveraging Python's powerful visualization capabilities.
-    \item The probabilities provide a normalized representation of the frequency distribution, making it easier to interpret the results.
-\end{itemize}
+
 \section*{Stemplot Distribution}
 When a die is rolled, the prime outcomes are ${2,3,5}$. Each face of a fair die has an equal probability of occurring, which is $\frac{1}{6}$. This means that each of the outcomes {2,3,5} have probability $\frac{1}{6}$
 \begin{itemize}

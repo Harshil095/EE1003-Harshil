@@ -2,39 +2,36 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Function to simulate rolling a single die
-void roll_one_die(int trials, int *results) {
-    for (int i = 0; i < trials; i++) {
-        int die = (rand() % 6) + 1; // Generate numbers from 1 to 6
-        results[die - 1]++; // Increment corresponding die face count
+// Function to simulate dice rolls and calculate probabilities for prime outcomes
+void simulate_prime_rolls(int trials, double *probs) {
+    int prime_counts[6] = {0}; // Counts for outcomes {1, 2, 3, 4, 5, 6}
+    int roll, i;
+
+    // Seed the random number generator
+    srand(time(NULL));
+
+    // Simulate dice rolls
+    for (i = 0; i < trials; i++) {
+        roll = (rand() % 6) + 1; // Generate numbers between 1 and 6
+        if (roll == 2 || roll == 3 || roll == 5) {
+            prime_counts[roll - 1]++; // Increment counts for prime numbers
+        }
+    }
+
+    // Calculate probabilities
+    for (i = 0; i < 6; i++) {
+        if (i == 1 || i == 2 || i == 4) { // Indices 1, 2, and 4 correspond to primes {2, 3, 5}
+            probs[i] = (double)prime_counts[i] / trials;
+        } else {
+            probs[i] = 0.0; // Non-prime outcomes have zero probability
+        }
     }
 }
 
-// Main function to calculate the probability of rolling a prime number
-int main() {
-    srand(time(0)); // Seed the random number generator only once
-    int trials = 1000000; // Number of trials
-    int results[6] = {0}; // Array to store counts for each face (1 to 6)
-    int primes[] = {2, 3, 5}; // Prime numbers on the die
-    int prime_count = 0;
-
-    // Simulate die rolls
-    roll_one_die(trials, results);
-
-    // Count occurrences of prime numbers
-    for (int i = 0; i < 3; i++) { // Iterate through prime numbers
-        prime_count += results[primes[i] - 1]; // Accumulate counts for primes
-    }
-
-    // Calculate and display the probability
-    double probability = (double)prime_count / trials;
-    printf("Estimated Probability of rolling a prime number: %f\n", probability);
-
-    // Optional: Display individual counts for each face
-    for (int i = 0; i < 6; i++) {
-        printf("Face %d appeared %d times.\n", i + 1, results[i]);
-    }
-
-    return 0;
+// Exported function for Python
+__attribute__((visibility("default"))) 
+__attribute__((used)) 
+void get_prime_probs(int trials, double *output_probs) {
+    simulate_prime_rolls(trials, output_probs);
 }
 
